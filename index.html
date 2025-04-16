@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetMetric</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div class="container">
+    <h1>LeetMetric</h1>
+
+    <div class="user-container">
+        <p>Enter your LeetCode username below:</p>
+        <div class="user-input-container">
+            <input type="text" placeholder="Enter your username here" id="user-input">
+            <button id="search-btn">Search</button>
+        </div>
+    </div>
+     
+    <div class="stats-container">
+        <!-- Fixed progress section HTML -->
+<div class="progress">
+    <div class="progress-item">
+        <div class="easy-progress">
+            <div class="progress-circle"></div>
+            <div class="progress-circle-fill"></div>
+            <div class="progress-inner">
+                <span id="easy-label">0/0</span>
+            </div>
+            <div class="difficulty-label">Easy</div>
+        </div>
+        <div class="medium-progress">
+            <div class="progress-circle"></div>
+            <div class="progress-circle-fill"></div>
+            <div class="progress-inner">
+                <span id="medium-label">0/0</span>
+            </div>
+            <div class="difficulty-label">Medium</div>
+        </div>
+        <div class="hard-progress">
+            <div class="progress-circle"></div>
+            <div class="progress-circle-fill"></div>
+            <div class="progress-inner">
+                <span id="hard-label">0/0</span>
+            </div>
+            <div class="difficulty-label">Hard</div>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div class="stats-card">
+            <!-- Populated by JavaScript -->
+            <div class="empty-state">
+                <p>Enter a LeetCode username to see statistics</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

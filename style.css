@@ -1,0 +1,510 @@
+/* Button loading state animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+    background-color: #3d4552 !important;
+    cursor: not-allowed;
+}
+
+/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e2127;
+    color: #abb2bf;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #61afef;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* User input styling */
+.user-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.user-input-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 0.5rem;
+    justify-content: center;
+}
+
+#user-input {
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #3e4451;
+    background-color: #282c34;
+    color: #abb2bf;
+    font-size: 1rem;
+    width: 60%;
+    outline: none;
+}
+
+#user-input:focus {
+    border-color: #61afef;
+}
+
+#search-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #61afef;
+    color: #282c34;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#search-btn:hover {
+    background-color: #56a0d8;
+}
+
+/* Progress section styling */
+.progress {
+    background-color: #282c34;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #3e4451;
+    margin-bottom: 1.5rem;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+/* Circular progress styling */
+.easy-progress, .medium-progress, .hard-progress {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #333842;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.progress-circle-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    clip: rect(0px, 80px, 80px, 40px);
+    background: transparent;
+    z-index: 2;
+}
+
+.progress-circle-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    clip: rect(0px, 40px, 80px, 0px);
+    transform: rotate(0deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.progress-circle-fill.greater-50 {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.progress-circle-fill.greater-50::before {
+    clip: rect(0px, 80px, 80px, 40px);
+}
+
+/* Circle colors */
+.easy-progress .progress-circle-fill::before {
+    background-color: #98c379; /* Green for easy */
+}
+
+.medium-progress .progress-circle-fill::before {
+    background-color: #e5c07b; /* Yellow for medium */
+}
+
+.hard-progress .progress-circle-fill::before {
+    background-color: #e06c75; /* Red for hard */
+}
+
+.progress-inner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #282c34;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.difficulty-label {
+    margin-top: 110px;
+    font-size: 0.9rem;
+    color: #abb2bf;
+    /* Color code difficulty labels */
+}
+
+.easy-progress .difficulty-label {
+    color: #98c379; /* Green for easy */
+}
+
+.medium-progress .difficulty-label {
+    color: #e5c07b; /* Yellow for medium */
+}
+
+.hard-progress .difficulty-label {
+    color: #e06c75; /* Red for hard */
+}
+
+/* Stats container updates */
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Stats card styling */
+.stats-card {
+    background-color: #282c34;
+    padding: 1.2rem;
+    border-radius: 6px;
+    border: 1px solid #3e4451;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    color: #61afef;
+    font-style: italic;
+}
+
+.user-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #3e4451;
+}
+
+.username {
+    color: #61afef;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.rank {
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.rank.elite {
+    background-color: rgba(224, 108, 117, 0.2);
+    color: #e06c75;
+    border: 1px solid #e06c75;
+}
+
+.rank.advanced {
+    background-color: rgba(229, 192, 123, 0.2);
+    color: #e5c07b;
+    border: 1px solid #e5c07b;
+}
+
+.rank.intermediate {
+    background-color: rgba(152, 195, 121, 0.2);
+    color: #98c379;
+    border: 1px solid #98c379;
+}
+
+.rank.beginner {
+    background-color: rgba(97, 175, 239, 0.2);
+    color: #61afef;
+    border: 1px solid #61afef;
+}
+
+.rank.unknown {
+    background-color: rgba(171, 178, 191, 0.2);
+    color: #abb2bf;
+    border: 1px solid #abb2bf;
+}
+
+.stats-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    min-width: 160px;
+    color: #abb2bf;
+}
+
+.stat-value {
+    color: #61afef;
+    font-weight: bold;
+}
+
+.stat-percentage {
+    margin-left: auto;
+    color: #98c379;
+}
+
+.progress-bar {
+    height: 6px;
+    width: 100%;
+    background-color: #333842;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0.3rem 0;
+}
+
+.progress-bar .progress-fill {
+    height: 100%;
+    background-color: #61afef;
+    border-radius: 3px;
+    transition: width 0.5s ease-in-out;
+    width: 0%; /* Default width */
+}
+
+.motivation-tip {
+    margin-top: 0.5rem;
+    padding: 0.8rem;
+    background-color: rgba(97, 175, 239, 0.1);
+    border-left: 3px solid #61afef;
+    border-radius: 4px;
+}
+
+.motivation-tip h3 {
+    color: #61afef;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.motivation-tip p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+}
+
+.motivation-tip .tip {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #98c379;
+}
+
+/* Error message styling */
+.error-message {
+    text-align: center;
+    padding: 1rem;
+    color: #e06c75;
+}
+
+/* Streak and activity metrics */
+.streak-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #3e4451;
+}
+
+.streak-item {
+    text-align: center;
+    flex: 1;
+}
+
+.streak-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #61afef;
+}
+
+.streak-label {
+    font-size: 0.8rem;
+    color: #abb2bf;
+}
+
+/* Additional profile metrics */
+.additional-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric-card {
+    background-color: #333842;
+    padding: 0.8rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #61afef;
+    margin-bottom: 0.3rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: #abb2bf;
+}
+
+/* Circular progress styling - FIXED VERSION */
+.easy-progress, .medium-progress, .hard-progress {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.progress-circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #333842;
+    z-index: 1;
+}
+
+.progress-circle-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    clip: rect(0px, 100px, 100px, 50px);
+    z-index: 2;
+    transform: rotate(0deg);
+}
+
+/* Required to create the fill effect */
+.progress-circle-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    clip: rect(0px, 50px, 100px, 0px);
+    z-index: 3;
+}
+
+/* This handles the second half of the circle when percentage > 50% */
+.progress-circle-fill.greater-50 {
+    clip: rect(auto, auto, auto, auto);
+}
+
+.progress-circle-fill.greater-50::before {
+    clip: rect(0px, 50px, 100px, 0px);
+    transform: rotate(180deg);
+}
+
+/* Circle colors */
+.easy-progress .progress-circle-fill::before {
+    background-color: #98c379; /* Green for easy */
+}
+
+.medium-progress .progress-circle-fill::before {
+    background-color: #e5c07b; /* Yellow for medium */
+}
+
+.hard-progress .progress-circle-fill::before {
+    background-color: #e06c75; /* Red for hard */
+}
+
+.progress-inner {
+    position: absolute;
+    width: 70px; /* Increased inner circle size */
+    height: 70px;
+    border-radius: 50%;
+    background: #282c34;
+    z-index: 4; /* Higher z-index to be above the fills */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Styling for difficulty labels */
+.difficulty-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.easy-progress .difficulty-label {
+    color: #98c379; /* Green for easy */
+}
+
+.medium-progress .difficulty-label {
+    color: #e5c07b; /* Yellow for medium */
+}
+
+.hard-progress .difficulty-label {
+    color: #e06c75; /* Red for hard */
+}
