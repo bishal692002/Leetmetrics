@@ -177,25 +177,17 @@ function updateProgressCircles(data) {
 
     // Function to update stats card
     function updateStatsCard(data, username) {
-        // Calculate total solved and acceptance rate
+        // Calculate metrics that are definitely available
         const totalSolved = data.totalSolved || 0;
         const totalQuestions = data.totalQuestions || 0;
         const solvedPercentage = totalQuestions ? Math.round((totalSolved / totalQuestions) * 100) : 0;
-        const acceptanceRate = data.acceptanceRate || "N/A";
-        const reputation = data.reputation || "N/A";
-        const contestRating = data.contestRating || "N/A";
-        const contributionPoints = data.contributionPoints || "N/A";
-        const lastActive = data.lastSubmission ? timeAgo(data.lastSubmission) : "N/A";
-        
-        // Additional metrics
-        const submissions = data.totalSubmissions || "N/A";
-        const acceptedSubmissions = data.acceptedSubmissions || "N/A";
-        const streak = data.streak || "N/A";
+        const acceptanceRate = data.acceptanceRate || 0;
         const ranking = data.ranking || "N/A";
-        const activeDays = data.activeDays || "N/A";
-        
-        // Create rank progress bar
-        const rankProgress = data.ranking ? (100 - Math.min(data.ranking / 1000, 100)) : 0;
+
+        // Get solved counts
+        const easySolved = data.easySolved || 0;
+        const mediumSolved = data.mediumSolved || 0;
+        const hardSolved = data.hardSolved || 0;
 
         const rankClass = data.ranking
             ? data.ranking <= 1000
@@ -207,7 +199,7 @@ function updateProgressCircles(data) {
                 : "beginner"
             : "unknown";
 
-        // Update the stats card with user info and metrics
+        // Update the stats card with only available metrics
         statsCard.innerHTML = `
             <div class="user-profile">
                 <h2 class="username">${username}</h2>
@@ -228,64 +220,24 @@ function updateProgressCircles(data) {
                     <span class="stat-label">Acceptance Rate:</span>
                     <span class="stat-value">${acceptanceRate}%</span>
                 </div>
-                
-                <div class="stat-item">
-                    <span class="stat-label">Submissions:</span>
-                    <span class="stat-value">${formatNumber(submissions)}</span>
-                </div>
-                
-                <div class="stat-item">
-                    <span class="stat-label">Accepted Submissions:</span>
-                    <span class="stat-value">${formatNumber(acceptedSubmissions)}</span>
-                </div>
-                
-                <div class="stat-item">
-                    <span class="stat-label">Contest Rating:</span>
-                    <span class="stat-value">${contestRating}</span>
-                </div>
-                
-                <div class="stat-item">
-                    <span class="stat-label">Contribution Points:</span>
-                    <span class="stat-value">${formatNumber(contributionPoints)}</span>
-                </div>
-
-                <div class="stat-item">
-                    <span class="stat-label">Last Active:</span>
-                    <span class="stat-value">${lastActive}</span>
-                </div>
-            </div>
-            
-            <div class="streak-container">
-                <div class="streak-item">
-                    <div class="streak-value">${formatNumber(streak)}</div>
-                    <div class="streak-label">Current Streak</div>
-                </div>
-                <div class="streak-item">
-                    <div class="streak-value">${formatNumber(activeDays)}</div>
-                    <div class="streak-label">Active Days</div>
-                </div>
-                <div class="streak-item">
-                    <div class="streak-value">${formatNumber(reputation)}</div>
-                    <div class="streak-label">Reputation</div>
-                </div>
             </div>
             
             <div class="additional-metrics">
                 <div class="metric-card">
-                    <div class="metric-value">${data.easySolved || 0}</div>
+                    <div class="metric-value">${easySolved}</div>
                     <div class="metric-label">Easy Problems</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">${data.mediumSolved || 0}</div>
+                    <div class="metric-value">${mediumSolved}</div>
                     <div class="metric-label">Medium Problems</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">${data.hardSolved || 0}</div>
+                    <div class="metric-value">${hardSolved}</div>
                     <div class="metric-label">Hard Problems</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">${calculateEfficiency(data)}%</div>
-                    <div class="metric-label">Efficiency Rate</div>
+                    <div class="metric-value">${acceptanceRate}%</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
             </div>
             
