@@ -85,113 +85,110 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
+/* User Profile Header in Progress Section */
+.user-profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #3e4451;
+}
+
+.username-display {
+    color: #61afef;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
 .progress-item {
     display: flex;
     justify-content: space-around;
-    gap: 1rem;
+    gap: 3rem;
+    padding: 1rem 0;
 }
 
-/* Circular progress styling */
-.easy-progress, .medium-progress, .hard-progress {
+/* SVG Circular progress styling */
+.progress-ring-container {
     position: relative;
-    width: 100px;
-    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.progress-circle {
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    stroke-dasharray: 251.2; /* 2 * PI * 40 (radius) */
+    stroke-dashoffset: 251.2; /* Start with full offset (empty circle) */
+}
+
+.progress-text {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #333842;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
-.progress-circle-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    clip: rect(0px, 80px, 80px, 40px);
-    background: transparent;
-    z-index: 2;
-}
-
-.progress-circle-fill::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    clip: rect(0px, 40px, 80px, 0px);
-    transform: rotate(0deg);
-    transition: transform 0.5s ease-in-out;
-}
-
-.progress-circle-fill.greater-50 {
-    clip: rect(auto, auto, auto, auto);
-}
-
-.progress-circle-fill.greater-50::before {
-    clip: rect(0px, 80px, 80px, 40px);
-}
-
-/* Circle colors */
-.easy-progress .progress-circle-fill::before {
-    background-color: #98c379; /* Green for easy */
-}
-
-.medium-progress .progress-circle-fill::before {
-    background-color: #e5c07b; /* Yellow for medium */
-}
-
-.hard-progress .progress-circle-fill::before {
-    background-color: #e06c75; /* Red for hard */
-}
-
-.progress-inner {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #282c34;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 0.85rem;
     font-weight: bold;
+    color: #abb2bf;
+    text-align: center;
 }
 
 .difficulty-label {
-    margin-top: 110px;
+    margin-top: 8px;
     font-size: 0.9rem;
     color: #abb2bf;
-    /* Color code difficulty labels */
 }
 
-.easy-progress .difficulty-label {
+.difficulty-label.easy-label {
     color: #98c379; /* Green for easy */
 }
 
-.medium-progress .difficulty-label {
+.difficulty-label.medium-label {
     color: #e5c07b; /* Yellow for medium */
 }
 
-.hard-progress .difficulty-label {
+.difficulty-label.hard-label {
     color: #e06c75; /* Red for hard */
+}
+
+/* Stats Info Bar */
+.stats-info-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #3e4451;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #abb2bf;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #61afef;
+}
+
+.info-divider {
+    width: 1px;
+    height: 40px;
+    background-color: #3e4451;
 }
 
 /* Stats container updates */
@@ -199,150 +196,6 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
-
-/* Stats card styling */
-.stats-card {
-    background-color: #282c34;
-    padding: 1.2rem;
-    border-radius: 6px;
-    border: 1px solid #3e4451;
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    transition: all 0.3s ease;
-}
-
-.empty-state {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    color: #61afef;
-    font-style: italic;
-}
-
-.user-profile {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid #3e4451;
-}
-
-.username {
-    color: #61afef;
-    font-size: 1.4rem;
-    margin: 0;
-}
-
-.rank {
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-.rank.elite {
-    background-color: rgba(224, 108, 117, 0.2);
-    color: #e06c75;
-    border: 1px solid #e06c75;
-}
-
-.rank.advanced {
-    background-color: rgba(229, 192, 123, 0.2);
-    color: #e5c07b;
-    border: 1px solid #e5c07b;
-}
-
-.rank.intermediate {
-    background-color: rgba(152, 195, 121, 0.2);
-    color: #98c379;
-    border: 1px solid #98c379;
-}
-
-.rank.beginner {
-    background-color: rgba(97, 175, 239, 0.2);
-    color: #61afef;
-    border: 1px solid #61afef;
-}
-
-.rank.unknown {
-    background-color: rgba(171, 178, 191, 0.2);
-    color: #abb2bf;
-    border: 1px solid #abb2bf;
-}
-
-.stats-summary {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.stat-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.stat-label {
-    min-width: 160px;
-    color: #abb2bf;
-}
-
-.stat-value {
-    color: #61afef;
-    font-weight: bold;
-}
-
-.stat-percentage {
-    margin-left: auto;
-    color: #98c379;
-}
-
-.progress-bar {
-    height: 6px;
-    width: 100%;
-    background-color: #333842;
-    border-radius: 3px;
-    overflow: hidden;
-    margin: 0.3rem 0;
-}
-
-.progress-bar .progress-fill {
-    height: 100%;
-    background-color: #61afef;
-    border-radius: 3px;
-    transition: width 0.5s ease-in-out;
-    width: 0%; /* Default width */
-}
-
-.motivation-tip {
-    margin-top: 0.5rem;
-    padding: 0.8rem;
-    background-color: rgba(97, 175, 239, 0.1);
-    border-left: 3px solid #61afef;
-    border-radius: 4px;
-}
-
-.motivation-tip h3 {
-    color: #61afef;
-    margin-bottom: 0.5rem;
-    margin-top: 0;
-}
-
-.motivation-tip p {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin: 0.5rem 0;
-}
-
-.motivation-tip .tip {
-    margin-top: 0.5rem;
-    font-style: italic;
-    color: #98c379;
 }
 
 /* Error message styling */
