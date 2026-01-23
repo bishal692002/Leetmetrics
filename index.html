@@ -9,7 +9,7 @@
 <body>
     
 <div class="container">
-    <h1>LeetMetric</h1>
+    <h1>LeetMetrics</h1>
 
     <div class="user-container">
         <p>Enter your LeetCode username below:</p>
@@ -22,40 +22,62 @@
     <div class="stats-container">
         <!-- Fixed progress section HTML -->
 <div class="progress">
+    <!-- User Profile Header -->
+    <div class="user-profile-header">
+        <h2 class="username-display" id="username-display">-</h2>
+    </div>
+    
     <div class="progress-item">
-        <div class="easy-progress">
-            <div class="progress-circle"></div>
-            <div class="progress-circle-fill"></div>
-            <div class="progress-inner">
+        <div class="progress-ring-container easy-progress">
+            <svg class="progress-ring" width="100" height="100">
+                <circle class="progress-ring-bg" stroke="#3e4451" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                <circle class="progress-ring-circle" id="easy-circle" stroke="#98c379" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-linecap="round"/>
+            </svg>
+            <div class="progress-text">
                 <span id="easy-label">0/0</span>
             </div>
-            <div class="difficulty-label">Easy</div>
+            <div class="difficulty-label easy-label">Easy</div>
         </div>
-        <div class="medium-progress">
-            <div class="progress-circle"></div>
-            <div class="progress-circle-fill"></div>
-            <div class="progress-inner">
+        <div class="progress-ring-container medium-progress">
+            <svg class="progress-ring" width="100" height="100">
+                <circle class="progress-ring-bg" stroke="#3e4451" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                <circle class="progress-ring-circle" id="medium-circle" stroke="#e5c07b" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-linecap="round"/>
+            </svg>
+            <div class="progress-text">
                 <span id="medium-label">0/0</span>
             </div>
-            <div class="difficulty-label">Medium</div>
+            <div class="difficulty-label medium-label">Medium</div>
         </div>
-        <div class="hard-progress">
-            <div class="progress-circle"></div>
-            <div class="progress-circle-fill"></div>
-            <div class="progress-inner">
+        <div class="progress-ring-container hard-progress">
+            <svg class="progress-ring" width="100" height="100">
+                <circle class="progress-ring-bg" stroke="#3e4451" stroke-width="8" fill="transparent" r="40" cx="50" cy="50"/>
+                <circle class="progress-ring-circle" id="hard-circle" stroke="#e06c75" stroke-width="8" fill="transparent" r="40" cx="50" cy="50" stroke-linecap="round"/>
+            </svg>
+            <div class="progress-text">
                 <span id="hard-label">0/0</span>
             </div>
-            <div class="difficulty-label">Hard</div>
+            <div class="difficulty-label hard-label">Hard</div>
+        </div>
+    </div>
+    
+    <!-- Stats Info Bar -->
+    <div class="stats-info-bar">
+        <div class="info-item">
+            <span class="info-label">Rank</span>
+            <span class="info-value" id="rank-value">-</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-label">Problems Solved</span>
+            <span class="info-value" id="solved-value">-</span>
+        </div>
+        <div class="info-divider"></div>
+        <div class="info-item">
+            <span class="info-label">Acceptance Rate</span>
+            <span class="info-value" id="acceptance-value">-</span>
         </div>
     </div>
 </div>
-        </div>
-
-        <div class="stats-card">
-            <!-- Populated by JavaScript -->
-            <div class="empty-state">
-                <p>Enter a LeetCode username to see statistics</p>
-            </div>
         </div>
     </div>
 </div>
